@@ -6,6 +6,7 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductByID,
   createCategory,
   getAllActiveCategories,
   updateCategory,
