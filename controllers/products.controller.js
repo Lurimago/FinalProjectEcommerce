@@ -71,7 +71,7 @@ const getAllActiveProducts = catchAsync(async (req, res, next) => {
   });
 });
 
-const getProductById = catchAsync(async (req, res, next) => {
+const getProductByID = catchAsync(async (req, res, next) => {
   const { product } = req;
 
   const id = product.id;
@@ -196,7 +196,7 @@ const updateCategory = catchAsync(async (req, res, next) => {
 module.exports = {
   createProduct,
   getAllActiveProducts,
-  getProductById,
+  getProductByID,
   updateProduct,
   deleteProduct,
   createCategory,
