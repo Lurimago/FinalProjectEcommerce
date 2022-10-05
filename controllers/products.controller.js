@@ -72,26 +72,22 @@ const getAllActiveProducts = catchAsync(async (req, res, next) => {
 });
 
 const getProductByID = catchAsync(async (req, res, next) => {
-  const { product } = req;
+  const { id } = req.params;
 
-  const id = product.id;
+  // Validate if the user exist with given email
+  const product = await Product.findOne({ where: { id, status: "active" } });
 
-  const productId = await Product.findOne({
-    where: { status: "active", id: id },
-    //   attributes: ['id', 'title', 'description', 'quantity', 'price', 'categoryId', 'userId', 'status'],
-    include: [
-      {
-        model: Product,
-        required: false,
-        where: { status: "active" },
-        //   attributes: ["id", "name", "address", "rating", "status"],
-      },
-    ],
-  });
+  // If user doesn't exist, send error message
+  if (!product) {
+      return res.status(404).json({
+          status: "error",
+          message: "Product not found",
+      });
+  }
 
-  res.status(201).json({
-    status: "success",
-    productId,
+  res.status(200).json({
+      status: "success",
+      data: { product },
   });
 });
 
