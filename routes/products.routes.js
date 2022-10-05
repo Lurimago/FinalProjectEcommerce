@@ -32,6 +32,7 @@ productsRouter.use(protectSession);
 
 productsRouter.get("/", getAllActiveProducts);
 productsRouter.get("/categories", getAllActiveCategories);
+productsRouter.get("/:id", productExists, getProductByID);
 
 // Get only 1 img
 // postsRouter.post('/', upload.single('postImg'), createPost);
